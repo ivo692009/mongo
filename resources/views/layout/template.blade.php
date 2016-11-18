@@ -1,12 +1,9 @@
- <!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Personas</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-theme.min.css') }}">
-        <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<meta charset="UTF-8">
+<title>Listado Personas</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
