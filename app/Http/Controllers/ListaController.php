@@ -26,10 +26,11 @@ class ListaController extends Controller
     *
     * @return Response
     */
-   public function store()
+   public function store(Request $request)
    {
-        $persona=Request::all();
-        Lista::create($persona);
+        $persona=new Lista($request ->all());
+        $persona->save();
+        
         return redirect('inicio');
 
    }
@@ -54,9 +55,9 @@ class ListaController extends Controller
     */
    public function edit($id)
    {
-     $persona=  Lista::collection('personas')
-                    ->where('id' , $id) 
-                    ->first();
+     
+     $persona = Lista::findOrFail($id);
+     
        return view('personas.editar',compact('persona'));
    }
    /**
@@ -65,14 +66,16 @@ class ListaController extends Controller
     * @param  int  $id
     * @return Response
     */
-   public function update($id)
+   public function update(Request $request, $id)
    {
-        $bookUpdate=Request::all();
-        $persona=  Lista::collection('personas')
-                    ->where('id' , $id) 
-                    ->first();
-        $persona->update($bookUpdate);
-        return redirect('inicio');
+         $persona = $request ->all();
+        
+         $b=  Lista::findOrFail($id);
+         
+         //dd($b);
+         
+            $b->update($persona);
+            return redirect('inicio');
    }
    /**
     * Remove the specified resource from storage.

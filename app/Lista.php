@@ -13,5 +13,6 @@ class Lista extends Eloquent {
             'nombre',
             'edad'
          ];
+         public $timestamps = false;
          
 }
