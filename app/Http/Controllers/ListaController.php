@@ -8,9 +8,9 @@ class ListaController extends Controller
 {
     public function index()
    {
-      $listado = DB::table('comercio_listado')
+      $listado = DB::collection('personas')
                     ->get();
-      return view('comercio.index',compact('listado'));
+      return view('personas.index',compact('listado'));
    }
    /**
     * Show the form for creating a new resource.
@@ -20,21 +20,19 @@ class ListaController extends Controller
    
    public function create()
    {
-      return view('comercio.nuevo');
+      return view('personas.nuevo');
    }
    /**
     * Store a newly created resource in storage.
     *
     * @return Response
     */
-   public function store(Request $request)
+   public function store()
    {
-     $nuevo= new Lista();
-     
-     $nuevo->save();
-     
-     return redirect('inicio');
-     
+        $persona=Request::all();
+        Lista::create($persona);
+        return redirect('inicio');
+
    }
    /**
     * Display the specified resource.
@@ -44,27 +42,10 @@ class ListaController extends Controller
     */
    public function show($id)
    {
-       $comercio=  DB::table('comercio_listado')
-                    ->where('id' , $id) 
-                    ->first();
-       $listado=  DB::table('lista_productos')
-                    ->where('id_comercio' , $id)
-                    ->select('lista_productos.*')
-                    ->get();
-//       return view('comercio.listado',compact('listado'));
-       return view('comercio.perfil',compact('comercio'), compact('listado'));
+       
    }
    
-   public function productos($id){
-       
-       $listado=  DB::table('lista_productos')
-                    ->where('id_comercio' , $id)
-                    ->select('lista_productos.*')
-                    ->get();
-//       return view('comercio.listado',compact('listado'));
-       return view('comercio.listado', compact('listado'));
-       
-   }
+
    /**
     * 
     * Show the form for editing the specified resource.
@@ -74,7 +55,10 @@ class ListaController extends Controller
     */
    public function edit($id)
    {
-      //
+     $persona=  DB::collection('personas')
+                    ->where('id' , $id) 
+                    ->first();
+       return view('personas.editar',compact('persona'));
    }
    /**
     * Update the specified resource in storage.
@@ -84,7 +68,12 @@ class ListaController extends Controller
     */
    public function update($id)
    {
-      //
+        $bookUpdate=Request::all();
+        $persona=  DB::collection('personas')
+                    ->where('id' , $id) 
+                    ->first();
+        $persona->update($bookUpdate);
+        return redirect('inicio');
    }
    /**
     * Remove the specified resource from storage.

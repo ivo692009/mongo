@@ -8,4 +8,9 @@ class Lista extends Eloquent {
 	
 	 protected $collection = 'personas';
 	
+         protected $fillable=[
+            'nombre',
+            'edad'
+         ];
+         
 }
