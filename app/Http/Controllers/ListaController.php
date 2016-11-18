@@ -8,8 +8,7 @@ class ListaController extends Controller
 {
     public function index()
    {
-      $listado = DB::collection('personas')
-                    ->get();
+      $listado = Lista::all();
       return view('personas.index',compact('listado'));
    }
    /**
@@ -55,7 +54,7 @@ class ListaController extends Controller
     */
    public function edit($id)
    {
-     $persona=  DB::collection('personas')
+     $persona=  Lista::collection('personas')
                     ->where('id' , $id) 
                     ->first();
        return view('personas.editar',compact('persona'));
@@ -69,7 +68,7 @@ class ListaController extends Controller
    public function update($id)
    {
         $bookUpdate=Request::all();
-        $persona=  DB::collection('personas')
+        $persona=  Lista::collection('personas')
                     ->where('id' , $id) 
                     ->first();
         $persona->update($bookUpdate);
